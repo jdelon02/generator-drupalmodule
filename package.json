@@ -1,6 +1,6 @@
 {
     "name":"@delongaz/generator-drupalmodule",
-    "version":"0.1.94",
+    "version":"0.1.95",
     "description":"Yeoman generator for drupal 7 modules with enhancements",
     "keywords":[
         "yeoman-generator",

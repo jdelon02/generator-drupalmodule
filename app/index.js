@@ -2,30 +2,34 @@
 var util = require('util');
 var path = require('path');
 var yeoman = require('yeoman-generator');
+var mkdirp = require('mkdirp');
+var fs = require('fs');
 var exec = require('child_process').exec;
-//var exec = require('sync-exec');
+//In your generator
+//mkdirp.sync('/some/path/to/dir/');
 
+var DrupalmoduleGenerator = module.exports = function DrupalmoduleGenerator(args, options, config) {
+  yeoman.generators.Base.apply(this, arguments);
+  
+  this.moduleName = path.basename(process.cwd());
 
-var DrupalmoduleGenerator = yeoman.Base.extend({
-	init: function () {
+  this.on('end', function () {
+    this.installDependencies({ skipInstall: options['skip-install'] });
+    
+    exec('composer install', function(error, stdout, stderr) {
+    	  if (error) {
+    	    console.log(stderr);
+    	  } else {
+    	    console.log(stdout);
+    	    console.log("Install Complete!");
+    	  }
+    	});
+  });
 
-		this.moduleName = path.basename(process.cwd());
+  //this.pkg = JSON.parse(this.readFileAsString(path.join(__dirname, '../package.json')));
+};
 
-		this.on('end', function () {
-			this.installDependencies({ skipInstall: options['skip-install'] }); 
-			exec('composer install', function(error, stdout, stderr) {
-    	  		if (error) {
-    	    		console.log(stderr);
-    	  		} else {
-		    	    console.log(stdout);
-		    	    console.log("Install Complete!");
-    	  		}
-			});
-		});
-	}
-});
-
-//util.inherits(DrupalmoduleGenerator, yeoman.generators.Base);
+util.inherits(DrupalmoduleGenerator, yeoman.generators.Base);
 
 DrupalmoduleGenerator.prototype.askFor = function askFor() {
   var cb = this.async();
@@ -91,5 +95,3 @@ DrupalmoduleGenerator.prototype.app = function app() {
     this.copy('template.js', 'js/' + mn + '.js');
   }
 };
-
-module.exports = DrupalmoduleGenerator;
