@@ -7,10 +7,9 @@ var exec = require('child_process').exec;
 var dotenv  = require('dotenv').config({path: process.cwd() + '/' + '.nodeenv'});
 
 //Will need some explaining
-var firetoken = process.env.FIREBASE_TOKEN;
 var author_name = process.env.AUTHOR_NAME;
 var author_email = process.env.AUTHOR_EMAIL;
-
+var firetoken = process.env.FIREBASE_TOKEN;
 
 var DrupalmoduleGenerator = function DrupalmoduleGenerator(args, options, config) {
   yeoman.Base.apply(this, arguments);
