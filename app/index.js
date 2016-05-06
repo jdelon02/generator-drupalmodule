@@ -3,6 +3,7 @@ var util = require('util');
 var path = require('path');
 var yeoman = require('yeoman-generator');
 var exec = require('child_process').exec;
+var dotenv  = require('dotenv').config({path: '~/.bash_profile'});
 
 //Will need some explaining
 var FIREBASE_TOKEN = process.env.FIREBASE_TOKEN;
