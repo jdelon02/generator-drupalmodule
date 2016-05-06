@@ -9,7 +9,7 @@ var exec = require('child_process').exec;
 //mkdirp.sync('/some/path/to/dir/');
 
 var DrupalmoduleGenerator = module.exports = function DrupalmoduleGenerator(args, options, config) {
-  yeoman.generators.Base.apply(this, arguments);
+  yeoman.Base.apply(this, arguments);
   
   this.moduleName = path.basename(process.cwd());
 
@@ -29,7 +29,7 @@ var DrupalmoduleGenerator = module.exports = function DrupalmoduleGenerator(args
   //this.pkg = JSON.parse(this.readFileAsString(path.join(__dirname, '../package.json')));
 };
 
-util.inherits(DrupalmoduleGenerator, yeoman.generators.Base);
+util.inherits(DrupalmoduleGenerator, yeoman.Base);
 
 DrupalmoduleGenerator.prototype.askFor = function askFor() {
   var cb = this.async();
