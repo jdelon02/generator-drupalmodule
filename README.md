@@ -11,3 +11,9 @@ Yeoman generator for drupal modules.
 
 ## License
 [MIT License](http://en.wikipedia.org/wiki/MIT_License)
+
+## Differences Planned:
+1.  Want to be able to run from modules folder, rather than having to already have module folder created.
+2.  Expanding package.json to include dependencies for linting, codesniffer, drupal coder, phpdoc generation, and more.
+3.  Better functionality documentation within module function calls (and might include a couple more).
+4.  We shall see...
