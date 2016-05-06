@@ -3,8 +3,8 @@ var util = require('util');
 var path = require('path');
 var yeoman = require('yeoman-generator');
 var mkdirp = require('mkdirp');
-var fs = require('fs');
-var exec = require('child_process').exec;
+//var fs = require('fs');
+//var exec = require('child_process').exec;
 //In your generator
 //mkdirp.sync('/some/path/to/dir/');
 
