@@ -1,6 +1,7 @@
 {
     "firebase":"<%= _.slugify(moduleName) %>",
     "public":"docs/",
+    "cleanUrls":true,
     "ignore":[
         "firebase.json",
         "**/vendor/**",

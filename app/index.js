@@ -35,7 +35,7 @@ var DrupalmoduleGenerator = function DrupalmoduleGenerator(args, options, config
         console.log("PHPDocs Generated!");
       }
     });
-    exec('firebase deploy', function(error, stdout, stderr) {
+    exec('firebase deploy -m \"initial upload\"', function(error, stdout, stderr) {
       if (error) {
         console.log(stderr);
       } else {
@@ -98,6 +98,15 @@ DrupalmoduleGenerator.prototype.app = function app() {
   this.mkdir(mn + '/views');
   this.mkdir(mn + '/includes');
   this.mkdir(mn + '/docs');
+  
+  exec('cd ' + mn + '; firebase -f ' + mn + ' -p docs ; cd ..', function(error, stdout, stderr) {
+    if (error) {
+	  console.log(stderr);
+	} else {
+	  console.log(stdout);
+	  console.log("Firebase Initial setup!");
+	}
+  });
   
   this.template('_package.json', mn + '/package.json');
   this.template('_bower.json', mn + '/bower.json');
