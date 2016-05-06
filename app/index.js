@@ -2,44 +2,33 @@
 var util = require('util');
 var path = require('path');
 var yeoman = require('yeoman-generator');
-var chalk = require('chalk');
-var exec = require('sync-exec');
-var askName = require('inquirer-npm-name');
-var fs = require('fs');
-
-function makeModuleName(name) {
-	  name = _.kebabCase(name);
-	  //name = name.indexOf('generator-') === 0 ? name : 'generator-' + name;
-	  return name;
-	}
+var exec = require('child_process').exec;
 
 var DrupalmoduleGenerator = yeoman.generators.Base.extend({
 	init: function () {
-	  this.on('end', function () {
-	    this.installDependencies({ skipInstall: options['skip-install'] });
-	    this.install: function () {
-			this.spawnCommand('composer', ['install']);
-		  }
-	  });
-	}
-});
 
+		this.moduleName = path.basename(process.cwd());
+
+		this.on('end', function () {
+			this.installDependencies({ skipInstall: options['skip-install'] }); 
+			exec('composer install', function(error, stdout, stderr) {
+    	  		if (error) {
+    	    		console.log(stderr);
+    	  		} else {
+		    	    console.log(stdout);
+		    	    console.log("Install Complete!");
+    	  		}
+			});
+		});
+	}
+};
+
+//util.inherits(DrupalmoduleGenerator, yeoman.generators.Base);
 
 DrupalmoduleGenerator.prototype.askFor = function askFor() {
   var cb = this.async();
 
   var prompts = [{
-    name: 'name',
-	message: 'Your Module Name',
-	default: makeModuleName(path.basename(process.cwd())),
-	filter: makeModuleName,
-	validate: function (str) {
-	  return str.length > 0;
-	}
-  },{
-	name: 'moduleName',
-	message: 'Your Module Name:'
-  },{
     name: 'moduleDesc',
     message: 'Describe your module:'
   },{
@@ -64,7 +53,6 @@ DrupalmoduleGenerator.prototype.askFor = function askFor() {
       return this.emit('error', err);
     }
 
-    this.moduleName = props.moduleName;
     this.moduleDesc = props.moduleDesc;
     this.modulePackage = props.modulePackage;
     this.dependencies = props.moduleDepend.length !== 0 ? 'dependencies[] = ' + props.moduleDepend.split(' ').join('\r\ndependencies[] = ') : '';
@@ -77,30 +65,27 @@ DrupalmoduleGenerator.prototype.askFor = function askFor() {
 
 DrupalmoduleGenerator.prototype.app = function app() {
   var mn = this.moduleName;
-  this.mkdir(mn);
-  this.mkdir(mn + '/css');
-  this.mkdir(mn + '/js');
-  this.mkdir(mn + '/templates');
-  this.mkdir(mn + '/views');
-  this.mkdir(mn + '/includes');
+  this.mkdir('css');
+  this.mkdir('js');
+  this.mkdir('templates');
+  this.mkdir('views');
+  this.mkdir('includes');
 
-  this.template('_package.json', mn + '/package.json');
-  this.template('_gulpfile.js', mn + '/gulpfile.js');
-  this.template('_phpdoc.xml', mn + '/phpdoc.xml');
-  this.template('_composer.json', mn + '/composer.json');
-  this.template('_firebase.json', mn + '/firebase.json');
-  this.template('_bitbucket-docs.json', mn + '/bitbucket-docs.json');
+  this.template('_package.json', 'package.json');
+  // this.copy('_bower.json', 'bower.json');
+  this.template('_gulpfile.js', 'gulpfile.js');
+  this.template('_phpdoc.xml', 'phpdoc.xml');
+  this.template('_composer.json', 'composer.json');
+  this.template('_firebase.json', 'firebase.json');
+  this.template('_bitbucket-docs.json', 'bitbucket-docs.json');
 
-  this.template('_template.info', mn + '/' + mn + '.info');
-  this.template('_template.module', mn + '/' + mn + '.module');
+  this.template('_template.info', mn + '.info');
+  this.template('_template.module', mn + '.module');
 
   if (this.stylesheets) {
-    this.copy('template.css', mn + '/css/' + mn + '.css');
+    this.copy('template.css', 'css/' + mn + '.css');
   }
   if (this.javascripts) {
-    this.copy('template.js', mn + '/js/' + mn + '.js');
+    this.copy('template.js', 'js/' + mn + '.js');
   }
 };
-
-
-module.exports = DrupalmoduleGenerator;
