@@ -4,7 +4,7 @@ var path = require('path');
 var yeoman = require('yeoman-generator');
 var exec = require('child_process').exec;
 
-var DrupalmoduleGenerator = yeoman.generators.Base.extend({
+var DrupalmoduleGenerator = yeoman.Base.extend({
 	init: function () {
 
 		this.moduleName = path.basename(process.cwd());
