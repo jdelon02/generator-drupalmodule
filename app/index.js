@@ -3,7 +3,7 @@ var util = require('util');
 var path = require('path');
 var yeoman = require('yeoman-generator');
 
-var DrupalmoduleGenerator = module.exports = yeoman.generators.Base.extend({
+var DrupalmoduleGenerator = module.exports = generators.Base.extend({
 	//yeoman.generators.Base.apply(this, arguments);
 	install: function () {
 	  this.spawnCommand('composer', ['install']);
