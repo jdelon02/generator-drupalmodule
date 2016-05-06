@@ -1,37 +1,41 @@
 {
-  "name": "generator-drupalmodule",
-  "version": "0.1.2",
-  "description": "Yeoman generator for drupal modules",
-  "keywords": [
-    "yeoman-generator"
-  ],
-  "homepage": "https://github.com/davidgenetic/generator-drupalmodule",
-  "bugs": "https://github.com/davidgenetic/generator-drupalmodule/issues",
-  "author": {
-    "name": "David De Coninck",
-    "email": "david@genetic.be",
-    "url": "https://github.com/davidgenetic"
-  },
-  "main": "app/index.js",
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/davidgenetic/generator-drupalmodule.git"
-  },
-  "scripts": {
-    "test": "mocha"
-  },
-  "dependencies": {
-    "yeoman-generator": "~0.10.2"
-  },
-  "devDependencies": {
-    "mocha": "~1.9.0"
-  },
-  "engines": {
-    "node": ">=0.8.0"
-  },
-  "licenses": [
-    {
-      "type": "MIT"
-    }
-  ]
+    "name":"generator-drupalmodule",
+    "version":"0.1.2",
+    "description":"Yeoman generator for drupal 7 modules with enhancements",
+    "keywords":[
+        "yeoman-generator"
+    ],
+    "homepage":"https://github.com/jdelon02/generator-drupalmodule",
+    "bugs":"https://github.com/jdelon02/generator-drupalmodule/issues",
+    "author":{
+        "name":"David De Coninck",
+        "email":"david@genetic.be",
+        "url":"https://github.com/davidgenetic"
+    },
+    "author":{
+        "name":"Jeremy DeLong",
+        "email":"chefjeremy@delongaz.com"
+    },
+    "main":"app/index.js",
+    "repository":{
+        "type":"git",
+        "url":"git://github.com/jdelon02/generator-drupalmodule.git"
+    },
+    "scripts":{
+        "test":"mocha"
+    },
+    "dependencies":{
+        "yeoman-generator":"~0.10.2"
+    },
+    "devDependencies":{
+        "mocha":"~1.9.0"
+    },
+    "engines":{
+        "node":">=0.8.0"
+    },
+    "licenses":[
+        {
+            "type":"MIT"
+        }
+    ]
 }

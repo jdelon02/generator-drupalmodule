@@ -1,5 +1,22 @@
 {
-  "name": "<%= _.slugify(moduleName) %>",
-  "version": "0.0.0",
-  "dependencies": {}
+    "name":"<%= _.slugify(moduleName) %>",
+    "version":"0.0.0",
+    "directories":{
+        "doc":"docs"
+    },
+    "dependencies":{
+        "doxydoc":"^0.5.0",
+        "jsdoc":"^3.4.0"
+    },
+    "devDependencies":{
+        "gulp":"^3.9.1",
+        "gulp-apigen":"^0.1.4",
+        "gulp-phpcbf":"^0.1.2",
+        "gulp-phpcs":"^1.0.0",
+        "gulp-phpmd":"^2.0.1",
+        "gulp-shell":"^0.5.2",
+        "gulp-util":"^3.0.7",
+        "gutil":"^1.6.4",
+        "phplint":"^1.7.1"
+    }
 }

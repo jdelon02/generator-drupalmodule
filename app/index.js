@@ -2,7 +2,10 @@
 var util = require('util');
 var path = require('path');
 var yeoman = require('yeoman-generator');
+var mkdirp = require('mkdirp');
 
+//In your generator
+//mkdirp.sync('/some/path/to/dir/');
 
 var DrupalmoduleGenerator = module.exports = function DrupalmoduleGenerator(args, options, config) {
   yeoman.generators.Base.apply(this, arguments);
@@ -61,6 +64,8 @@ DrupalmoduleGenerator.prototype.app = function app() {
 
   this.template('_package.json', 'package.json');
   // this.copy('_bower.json', 'bower.json');
+  this.template('_gulpfile.js', 'gulpfile.js');
+  this.template('_phpdoc.xml', 'phpdoc.xml');
 
   this.template('_template.info', mn + '.info');
   this.template('_template.module', mn + '.module');

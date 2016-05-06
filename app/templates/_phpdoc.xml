@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<phpdoc>
+	<title><%= _.slugify(moduleName) %></title>
+	<parser>
+		<target>docs</target>
+		<markers>
+			<item>TODO</item>
+			<item>FIXME</item>
+		</markers>
+		<extensions>
+			<extension>module</extension>
+			<extension>inc</extension>
+			<extension>install</extension>
+			<extension>php</extension>
+		</extensions>
+	</parser>
+	<transformer>
+		<target>docs</target>
+	</transformer>
+	<files>
+		<directory>.</directory>
+		<ignore>src/*</ignore>
+		<ignore>vendor/*</ignore>
+		<ignore>node_modules/*</ignore>
+		<ignore>docs/*</ignore>
+		<ignore>test.php</ignore>
+	</files>
+	<transformations>
+		<template name="clean" />
+	</transformations>
+</phpdoc>
