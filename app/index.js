@@ -2,7 +2,9 @@
 var util = require('util');
 var path = require('path');
 var yeoman = require('yeoman-generator');
-var exec = require('child_process').exec;
+//var exec = require('child_process').exec;
+var exec = require('sync-exec');
+
 
 var DrupalmoduleGenerator = yeoman.Base.extend({
 	init: function () {
