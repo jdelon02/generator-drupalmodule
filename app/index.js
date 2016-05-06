@@ -3,9 +3,21 @@ var util = require('util');
 var path = require('path');
 var yeoman = require('yeoman-generator');
 
+var DrupalmoduleGenerator = module.exports = yeoman.generators.Base.extend({
+	//yeoman.generators.Base.apply(this, arguments);
+	install: function () {
+	  this.spawnCommand('composer', ['install']);
+	}
+	this.moduleName = path.basename(process.cwd());
+    this.on('end', function () {
+	  this.installDependencies({ skipInstall: options['skip-install'] });
+	});
+});
+
+
 var DrupalmoduleGenerator = module.exports = function DrupalmoduleGenerator(args, options, config) {
   yeoman.generators.Base.apply(this, arguments);
-  yeoman.generators.Base.extend({
+  generators.Base.extend({
 	install: function () {
 	  this.spawnCommand('composer', ['install']);
 	}
@@ -17,7 +29,7 @@ var DrupalmoduleGenerator = module.exports = function DrupalmoduleGenerator(args
   });
 };
 
-util.inherits(DrupalmoduleGenerator, yeoman.generators.Base);
+//util.inherits(DrupalmoduleGenerator, yeoman.generators.Base);
 
 DrupalmoduleGenerator.prototype.askFor = function askFor() {
   var cb = this.async();
