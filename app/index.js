@@ -89,3 +89,5 @@ DrupalmoduleGenerator.prototype.app = function app() {
     this.copy('template.js', 'js/' + mn + '.js');
   }
 };
+
+module.exports = DrupalmoduleGenerator;
