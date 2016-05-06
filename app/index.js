@@ -7,11 +7,11 @@ var fs = require('fs');
 var exec = require('child_process').exec;
 //In your generator
 //mkdirp.sync('/some/path/to/dir/');
-function makeModuleName(moduleName) {
-	moduleName = _.kebabCase(moduleName);
+//function makeModuleName(moduleName) {
+	//moduleName = _.kebabCase(moduleName);
   //name = name.indexOf('generator-') === 0 ? name : 'generator-' + name;
-  return moduleName;
-}
+  //return moduleName;
+//}
 
 
 var DrupalmoduleGenerator = module.exports = function DrupalmoduleGenerator(args, options, config) {
@@ -42,12 +42,12 @@ DrupalmoduleGenerator.prototype.askFor = function askFor() {
 
   var prompts = [{
 	name: 'moduleName',
-	message: 'Your Module Name',
-	default: makeModuleName(path.basename(process.cwd())),
-	filter: makeModuleName,
-	validate: function (str) {
-	  return str.length > 0;
-	}
+	message: 'Your Module Name (no spaces)'
+//	default: makeModuleName(path.basename(process.cwd())),
+//	filter: makeModuleName,
+//	validate: function (str) {
+//	  return str.length > 0;
+//	}
   },{
     name: 'moduleDesc',
     message: 'Describe your module:'
