@@ -5,14 +5,6 @@ var yeoman = require('yeoman-generator');
 var mkdirp = require('mkdirp');
 var fs = require('fs');
 var exec = require('child_process').exec;
-//In your generator
-//mkdirp.sync('/some/path/to/dir/');
-//function makeModuleName(moduleName) {
-	//moduleName = _.kebabCase(moduleName);
-  //name = name.indexOf('generator-') === 0 ? name : 'generator-' + name;
-  //return moduleName;
-//}
-
 
 var DrupalmoduleGenerator = module.exports = function DrupalmoduleGenerator(args, options, config) {
   yeoman.Base.apply(this, arguments);
@@ -20,8 +12,9 @@ var DrupalmoduleGenerator = module.exports = function DrupalmoduleGenerator(args
   //this.moduleName = path.basename(process.cwd());
 
   this.on('end', function () {
+	var npmdir = process.cwd() + '/' + this.moduleName;
+    process.chdir(npmdir);
     this.installDependencies({ skipInstall: options['skip-install'] });
-    
     exec('composer install', function(error, stdout, stderr) {
     	  if (error) {
     	    console.log(stderr);
@@ -95,6 +88,7 @@ DrupalmoduleGenerator.prototype.app = function app() {
   this.mkdir(mn + '/includes');
 
   this.template('_package.json', mn + '/package.json');
+  this.template('_bower.json', mn + '/bower.json');
   this.template('_gulpfile.js', mn + '/gulpfile.js');
   this.template('_phpdoc.xml', mn + '/phpdoc.xml');
   this.template('_composer.json', mn + '/composer.json');
