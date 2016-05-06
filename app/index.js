@@ -15,19 +15,19 @@ var DrupalmoduleGenerator = module.exports = yeoman.generators.Base.extend({
 });
 
 
-var DrupalmoduleGenerator = module.exports = function DrupalmoduleGenerator(args, options, config) {
-  yeoman.generators.Base.apply(this, arguments);
-  generators.Base.extend({
-	install: function () {
-	  this.spawnCommand('composer', ['install']);
-	}
-  });
-  this.moduleName = path.basename(process.cwd());
-
-  this.on('end', function () {
-    this.installDependencies({ skipInstall: options['skip-install'] });
-  });
-};
+//var DrupalmoduleGenerator = module.exports = function DrupalmoduleGenerator(args, options, config) {
+//  yeoman.generators.Base.apply(this, arguments);
+//  generators.Base.extend({
+//	install: function () {
+//	  this.spawnCommand('composer', ['install']);
+//	}
+//  });
+//  this.moduleName = path.basename(process.cwd());
+//
+//  this.on('end', function () {
+//    this.installDependencies({ skipInstall: options['skip-install'] });
+//  });
+//};
 
 //util.inherits(DrupalmoduleGenerator, yeoman.generators.Base);
 
@@ -78,7 +78,6 @@ DrupalmoduleGenerator.prototype.app = function app() {
   this.mkdir('includes');
 
   this.template('_package.json', 'package.json');
-  // this.copy('_bower.json', 'bower.json');
   this.template('_gulpfile.js', 'gulpfile.js');
   this.template('_phpdoc.xml', 'phpdoc.xml');
   this.template('_composer.json', 'composer.json');
