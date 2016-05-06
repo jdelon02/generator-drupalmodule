@@ -51,8 +51,8 @@ DrupalmoduleGenerator.prototype.askFor = function askFor() {
     this.moduleDesc = props.moduleDesc;
     this.modulePackage = props.modulePackage;
     this.dependencies = props.moduleDepend.length !== 0 ? 'dependencies[] = ' + props.moduleDepend.split(' ').join('\r\ndependencies[] = ') : '';
-    this.stylesheets = (/y/i).test(props.addCss) ? 'stylesheets[all][] = ' + this.moduleName + '.css' : '';
-    this.javascripts = (/y/i).test(props.addJs)? 'scripts[] = ' + this.moduleName + '.js' : '';
+    this.stylesheets = (/y/i).test(props.addCss) ? 'stylesheets[all][] = css/' + this.moduleName + '.css' : '';
+    this.javascripts = (/y/i).test(props.addJs)? 'scripts[] = js/' + this.moduleName + '.js' : '';
 
     cb();
   }.bind(this));
@@ -60,20 +60,27 @@ DrupalmoduleGenerator.prototype.askFor = function askFor() {
 
 DrupalmoduleGenerator.prototype.app = function app() {
   var mn = this.moduleName;
-  // this.mkdir(mn);
+  this.mkdir('css');
+  this.mkdir('js');
+  this.mkdir('templates');
+  this.mkdir('views');
+  this.mkdir('includes');
 
   this.template('_package.json', 'package.json');
   // this.copy('_bower.json', 'bower.json');
   this.template('_gulpfile.js', 'gulpfile.js');
   this.template('_phpdoc.xml', 'phpdoc.xml');
+  this.template('_composer.json', 'composer.json');
+  this.template('_firebase.json', 'firebase.json');
+  this.template('_bitbucket-docs.json', 'bitbucket-docs.json');
 
   this.template('_template.info', mn + '.info');
   this.template('_template.module', mn + '.module');
 
   if (this.stylesheets) {
-    this.copy('template.css', mn + '.css');
+    this.copy('template.css', 'css/' + mn + '.css');
   }
   if (this.javascripts) {
-    this.copy('template.js', mn + '.js');
+    this.copy('template.js', 'js/' + mn + '.js');
   }
 };

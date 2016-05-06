@@ -1,0 +1,3 @@
+{
+    "url":"https://<%= _.slugify(moduleName) %>.firebaseapp.com"
+}
