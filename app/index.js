@@ -12,13 +12,21 @@ var DrupalmoduleGenerator = function DrupalmoduleGenerator(args, options, config
     process.chdir(moduledir);
     this.installDependencies({ skipInstall: options['skip-install'] });
     exec('composer install', function(error, stdout, stderr) {
-    	  if (error) {
-    	    console.log(stderr);
-    	  } else {
-    	    console.log(stdout);
-    	    console.log("Install Complete!");
-    	  }
-    	});
+      if (error) {
+        console.log(stderr);
+      } else {
+        console.log(stdout);
+        console.log("Install Complete!");
+      }
+    });
+    exec('git init; git add .; git commit -m \"Initial Commit\"', function(error, stdout, stderr) {
+      if (error) {
+        console.log(stderr);
+      } else {
+        console.log(stdout);
+        console.log("git ran!");
+      }
+    });
   });
 };
 
@@ -73,6 +81,7 @@ DrupalmoduleGenerator.prototype.app = function app() {
   this.mkdir(mn + '/templates');
   this.mkdir(mn + '/views');
   this.mkdir(mn + '/includes');
+  this.mkdir(mn + '/docs');
   
   this.template('_package.json', mn + '/package.json');
   this.template('_bower.json', mn + '/bower.json');
