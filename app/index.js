@@ -93,9 +93,9 @@ DrupalmoduleGenerator.prototype.app = function app() {
   this.template('_template.module', mn + '/' + mn + '.module');
 
   if (this.stylesheets) {
-    this.copy('template.css', mn + '/' + 'css/' + mn + '.css');
+    this.copy('template.css', mn + '/css/' + mn + '.css');
   }
   if (this.javascripts) {
-    this.copy('template.js', mn + '/' + 'js/' + mn + '.js');
+    this.copy('template.js', mn + '/js/' + mn + '.js');
   }
 };
