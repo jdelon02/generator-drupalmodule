@@ -1,25 +1,34 @@
 <?php
+/**
+ * @file <%= moduleName %>.module
+ */
 
 /**
  * Implements hook_menu().
+ * 
+ * @return array.
  */
 function <%= moduleName %>_menu(){
   $items = array();
 
-  $items['some/path'] = array(
-    'title' => '',
-    'description' => '',
-    'type' => MENU_NORMAL_ITEM,
-    'page callback' => '',
-    'page arguments' => array(),
-    'access arguments' => array('my custom permission')
-  );
+$items['some/path'] = array(
+  'title' => '', 
+  'description' => '', 
+  'type' => MENU_NORMAL_ITEM, 
+  'page callback' => '', 
+  'page arguments' => array(), 
+  'access arguments' => array(
+    'my custom permission'
+  )
+);
 
-  return $items;
+return $items;
 }
 
 /**
  * Implements hook_permission().
+ * 
+ * @return array.
  */
 function <%= moduleName %>_permission(){
   $perms = array();
