@@ -1,5 +1,5 @@
 {
-    "firebase":"<%= _.slugify(moduleName) %>",
+    "firebase":"ma-<%= _.slugify(moduleName) %>",
     "public":"docs/",
     "cleanUrls":true,
     "ignore":[
