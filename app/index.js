@@ -33,7 +33,7 @@ DrupalmoduleGenerator.prototype.askFor = function askFor() {
     default: 'Custom'
   },{
     name: 'moduleDepend',
-    message: 'What are your module\'s dependenies? (space seperated)'
+    message: 'What are your module\'s Drupal dependenies? (space seperated)'
   },{
     name: 'addCss',
     message: 'Add stylesheet?',
