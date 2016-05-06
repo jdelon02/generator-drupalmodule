@@ -8,19 +8,10 @@ var exec = require('sync-exec');
 
 var DrupalmoduleGenerator = yeoman.Base.extend({
 	init: function () {
-
 		this.moduleName = path.basename(process.cwd());
-
 		this.on('end', function () {
 			this.installDependencies({ skipInstall: options['skip-install'] }); 
-			exec('composer install', function(error, stdout, stderr) {
-    	  		if (error) {
-    	    		console.log(stderr);
-    	  		} else {
-		    	    console.log(stdout);
-		    	    console.log("Install Complete!");
-    	  		}
-			});
+			exec('composer install');
 		});
 	}
 });
