@@ -16,7 +16,7 @@ var DrupalmoduleGenerator = function DrupalmoduleGenerator(args, options, config
         console.log(stderr);
       } else {
         console.log(stdout);
-        console.log("Install Complete!");
+        console.log("Composer Install Complete!");
       }
     });
     exec('git init; git add .; git commit -m \"Initial Commit\"', function(error, stdout, stderr) {
@@ -24,7 +24,23 @@ var DrupalmoduleGenerator = function DrupalmoduleGenerator(args, options, config
         console.log(stderr);
       } else {
         console.log(stdout);
-        console.log("git ran!");
+        console.log("Git Initialized!");
+      }
+    });
+    exec('gulp phpdoc', function(error, stdout, stderr) {
+      if (error) {
+        console.log(stderr);
+      } else {
+        console.log(stdout);
+        console.log("PHPDocs Generated!");
+      }
+    });
+    exec('firebase deploy', function(error, stdout, stderr) {
+      if (error) {
+        console.log(stderr);
+      } else {
+        console.log(stdout);
+        console.log("Firebase Initial Deploy!");
       }
     });
   });
