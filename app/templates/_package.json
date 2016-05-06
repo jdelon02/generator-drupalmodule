@@ -1,5 +1,6 @@
 {
     "name":"<%= _.slugify(moduleName) %>",
+    "description":"<%= _.slugify(moduleDesc) %>",
     "version":"0.0.0",
     "directories":{
         "doc":"docs"

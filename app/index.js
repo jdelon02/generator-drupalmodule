@@ -27,7 +27,7 @@ var DrupalmoduleGenerator = function DrupalmoduleGenerator(args, options, config
         console.log("Git Initialized!");
       }
     });
-    exec('gulp phpdoc', function(error, stdout, stderr) {
+    exec('gulp; phpdoc', function(error, stdout, stderr) {
       if (error) {
         console.log(stderr);
       } else {
