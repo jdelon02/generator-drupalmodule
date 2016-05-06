@@ -1,8 +1,11 @@
 'use strict';
 var util = require('util');
 var path = require('path');
-var askName = require('inquirer-npm-name');
 var yeoman = require('yeoman-generator');
+var chalk = require('chalk');
+var exec = require('sync-exec');
+var askName = require('inquirer-npm-name');
+var fs = require('fs');
 
 function makeModuleName(name) {
 	  name = _.kebabCase(name);
@@ -10,16 +13,16 @@ function makeModuleName(name) {
 	  return name;
 	}
 
-var DrupalmoduleGenerator = module.exports = yeoman.Base.extend({
-	constructor: function () {
-	  yeoman.Base.apply(this, arguments);
-	  install: function () {
+var DrupalmoduleGenerator = yeoman.generators.Base.extend({
+	init: function () {
+	  this.install: function () {
 		this.spawnCommand('composer', ['install']);
 	  }
+
+	  this.on('end', function () {
+	    this.installDependencies({ skipInstall: options['skip-install'] });
+	  });
 	}
-	this.on('end', function () {
-	  this.installDependencies({ skipInstall: options['skip-install'] });
-	});
 });
 
 
@@ -99,3 +102,6 @@ DrupalmoduleGenerator.prototype.app = function app() {
     this.copy('template.js', mn + '/js/' + mn + '.js');
   }
 };
+
+
+module.exports = DrupalmoduleGenerator;
