@@ -2,7 +2,6 @@
 var util = require('util');
 var path = require('path');
 var yeoman = require('yeoman-generator');
-var mkdirp = require('mkdirp');
 
 var DrupalmoduleGenerator = module.exports = function DrupalmoduleGenerator(args, options, config) {
   yeoman.generators.Base.apply(this, arguments);
@@ -15,7 +14,7 @@ var DrupalmoduleGenerator = module.exports = function DrupalmoduleGenerator(args
 
   this.on('end', function () {
     this.installDependencies({ skipInstall: options['skip-install'] });
-    
+  });
 };
 
 util.inherits(DrupalmoduleGenerator, yeoman.generators.Base);
