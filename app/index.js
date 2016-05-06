@@ -13,6 +13,7 @@ var DrupalmoduleGenerator = module.exports = function DrupalmoduleGenerator(args
 
   this.on('end', function () {
     this.installDependencies({ skipInstall: options['skip-install'] });
+    this.spawnCommand('composer', ['install']);
   });
 
   //this.pkg = JSON.parse(this.readFileAsString(path.join(__dirname, '../package.json')));

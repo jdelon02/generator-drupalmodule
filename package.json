@@ -3,7 +3,8 @@
     "version":"0.1.2",
     "description":"Yeoman generator for drupal 7 modules with enhancements",
     "keywords":[
-        "yeoman-generator"
+        "yeoman-generator",
+        "Drupal 7 Module"
     ],
     "homepage":"https://github.com/jdelon02/generator-drupalmodule",
     "bugs":"https://github.com/jdelon02/generator-drupalmodule/issues",
