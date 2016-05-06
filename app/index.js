@@ -10,19 +10,25 @@ var exec = require('child_process').exec;
 
 var DrupalmoduleGenerator = module.exports = function DrupalmoduleGenerator(args, options, config) {
   yeoman.generators.Base.apply(this, arguments);
+  yeoman.generators.Base.extend({
+	  install: function () {
+	    this.spawnCommand('composer', ['install']);
+	  }
+	});
   this.moduleName = path.basename(process.cwd());
 
   this.on('end', function () {
     this.installDependencies({ skipInstall: options['skip-install'] });
-    exec('composer install', function(error, stdout, stderr) {
-    	  if (error) {
-    	    console.log(stderr);
-    	  } else {
-    	    console.log(stdout);
-    	    console.log("Install Complete!");
-    	  }
-    	});
-  });
+    
+//    exec('composer install', function(error, stdout, stderr) {
+//    	  if (error) {
+//    	    console.log(stderr);
+//    	  } else {
+//    	    console.log(stdout);
+//    	    console.log("Install Complete!");
+//    	  }
+//    	});
+//  });
 
   //this.pkg = JSON.parse(this.readFileAsString(path.join(__dirname, '../package.json')));
 };
