@@ -2,18 +2,14 @@
 var util = require('util');
 var path = require('path');
 var yeoman = require('yeoman-generator');
-var mkdirp = require('mkdirp');
-var fs = require('fs');
 var exec = require('child_process').exec;
 
-var DrupalmoduleGenerator = module.exports = function DrupalmoduleGenerator(args, options, config) {
+var DrupalmoduleGenerator = function DrupalmoduleGenerator(args, options, config) {
   yeoman.Base.apply(this, arguments);
   
-  //this.moduleName = path.basename(process.cwd());
-
   this.on('end', function () {
-	var npmdir = process.cwd() + '/' + this.moduleName;
-    process.chdir(npmdir);
+	var moduledir = process.cwd() + '/' + this.moduleName;
+    process.chdir(moduledir);
     this.installDependencies({ skipInstall: options['skip-install'] });
     exec('composer install', function(error, stdout, stderr) {
     	  if (error) {
@@ -24,8 +20,6 @@ var DrupalmoduleGenerator = module.exports = function DrupalmoduleGenerator(args
     	  }
     	});
   });
-
-  //this.pkg = JSON.parse(this.readFileAsString(path.join(__dirname, '../package.json')));
 };
 
 util.inherits(DrupalmoduleGenerator, yeoman.Base);
@@ -36,11 +30,6 @@ DrupalmoduleGenerator.prototype.askFor = function askFor() {
   var prompts = [{
 	name: 'moduleName',
 	message: 'Your Module Name (no spaces)'
-//	default: makeModuleName(path.basename(process.cwd())),
-//	filter: makeModuleName,
-//	validate: function (str) {
-//	  return str.length > 0;
-//	}
   },{
     name: 'moduleDesc',
     message: 'Describe your module:'
@@ -81,12 +70,10 @@ DrupalmoduleGenerator.prototype.app = function app() {
   
   var mn = this.moduleName;
   this.mkdir(mn);
-  this.mkdir(mn + '/css');
-  this.mkdir(mn + '/js');
   this.mkdir(mn + '/templates');
   this.mkdir(mn + '/views');
   this.mkdir(mn + '/includes');
-
+  
   this.template('_package.json', mn + '/package.json');
   this.template('_bower.json', mn + '/bower.json');
   this.template('_gulpfile.js', mn + '/gulpfile.js');
@@ -98,10 +85,17 @@ DrupalmoduleGenerator.prototype.app = function app() {
   this.template('_template.info', mn + '/' + mn + '.info');
   this.template('_template.module',  mn + '/' + mn + '.module');
 
+  this.copy('gitignore', mn + '/.gitignore');
+  
   if (this.stylesheets) {
+	this.mkdir(mn + '/css');
     this.copy('template.css',  mn + '/css/' + mn + '.css');
   }
   if (this.javascripts) {
+	this.mkdir(mn + '/js');
     this.copy('template.js',  mn + '/js/' + mn + '.js');
   }
 };
+
+module.exports = DrupalmoduleGenerator;
+
