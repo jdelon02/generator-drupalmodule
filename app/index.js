@@ -3,7 +3,8 @@ var util = require('util');
 var path = require('path');
 var yeoman = require('yeoman-generator');
 var mkdirp = require('mkdirp');
-
+var fs = require('fs');
+var exec = require('child_process').exec;
 //In your generator
 //mkdirp.sync('/some/path/to/dir/');
 
@@ -13,7 +14,14 @@ var DrupalmoduleGenerator = module.exports = function DrupalmoduleGenerator(args
 
   this.on('end', function () {
     this.installDependencies({ skipInstall: options['skip-install'] });
-    this.spawnCommand('composer', ['install']);
+    exec('composer install', function(error, stdout, stderr) {
+    	  if (error) {
+    	    console.log(stderr);
+    	  } else {
+    	    console.log(stdout);
+    	    console.log("Install Complete!");
+    	  }
+    	});
   });
 
   //this.pkg = JSON.parse(this.readFileAsString(path.join(__dirname, '../package.json')));
