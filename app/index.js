@@ -15,12 +15,11 @@ function makeModuleName(name) {
 
 var DrupalmoduleGenerator = yeoman.generators.Base.extend({
 	init: function () {
-	  this.install: function () {
-		this.spawnCommand('composer', ['install']);
-	  }
-
 	  this.on('end', function () {
 	    this.installDependencies({ skipInstall: options['skip-install'] });
+	    this.install: function () {
+			this.spawnCommand('composer', ['install']);
+		  }
 	  });
 	}
 });
