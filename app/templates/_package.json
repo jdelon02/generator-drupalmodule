@@ -2,6 +2,10 @@
     "name":"<%= _.slugify(moduleName) %>",
     "description":"<%= _.slugify(moduleDesc) %>",
     "version":"0.0.0",
+    "author":{
+        "name":"<%= _.slugify(authorName) %>",
+        "email":"<%= _.slugify(authorEmail) %>"
+    },
     "directories":{
         "doc":"docs"
     },

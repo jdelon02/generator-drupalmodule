@@ -4,6 +4,12 @@ var path = require('path');
 var yeoman = require('yeoman-generator');
 var exec = require('child_process').exec;
 
+//Will need some explaining
+var FIREBASE_TOKEN = process.env.FIREBASE_TOKEN;
+var author_name = process.env.GIT_AUTHOR_NAME;
+var author_email = process.env.GIT_AUTHOR_EMAIL;
+
+
 var DrupalmoduleGenerator = function DrupalmoduleGenerator(args, options, config) {
   yeoman.Base.apply(this, arguments);
   
@@ -35,7 +41,7 @@ var DrupalmoduleGenerator = function DrupalmoduleGenerator(args, options, config
         console.log("PHPDocs Generated!");
       }
     });
-    exec('firebase deploy -m \"initial upload\"', function(error, stdout, stderr) {
+    exec('firebase deploy -m \"initial upload\" --token "' + FIREBASE_TOKEN + '"', function(error, stdout, stderr) {
       if (error) {
         console.log(stderr);
       } else {
@@ -79,6 +85,8 @@ DrupalmoduleGenerator.prototype.askFor = function askFor() {
       return this.emit('error', err);
     }
     
+    this.authorName = author_name;
+    this.authorEmail = author_email;
     this.moduleName = props.moduleName;
     this.moduleDesc = props.moduleDesc;
     this.modulePackage = props.modulePackage;
@@ -99,7 +107,7 @@ DrupalmoduleGenerator.prototype.app = function app() {
   this.mkdir(mn + '/includes');
   this.mkdir(mn + '/docs');
   
-  exec('cd ' + mn + '; firebase -f ' + mn + ' -p docs ; cd ..', function(error, stdout, stderr) {
+  exec('cd ' + mn + '; firebase -f ' + mn + ' -p docs --token "' + FIREBASE_TOKEN + '"; cd ..', function(error, stdout, stderr) {
     if (error) {
 	  console.log(stderr);
 	} else {
