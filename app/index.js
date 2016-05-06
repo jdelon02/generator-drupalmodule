@@ -21,7 +21,7 @@ var DrupalmoduleGenerator = yeoman.generators.Base.extend({
 			});
 		});
 	}
-};
+});
 
 //util.inherits(DrupalmoduleGenerator, yeoman.generators.Base);
 
